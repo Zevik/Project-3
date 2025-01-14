@@ -1,32 +1,41 @@
+import { kv } from '@vercel/kv';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
   const [note, setNote] = useState('');
-  const [notes, setNotes] = useState(() => {
-    const savedNotes = localStorage.getItem('notes');
-    return savedNotes ? JSON.parse(savedNotes) : [];
-  });
+  const [notes, setNotes] = useState([]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(notes));
-  }, [notes]);
+    loadNotes();
+  }, []);
 
-  const addNote = () => {
+  const loadNotes = async () => {
+    const savedNotes = await kv.get('notes');
+    if (savedNotes) {
+      setNotes(savedNotes);
+    }
+  };
+
+  const addNote = async () => {
     if (note.trim()) {
       const newNote = {
         id: Date.now(),
         text: note,
         date: new Date().toLocaleDateString('he-IL')
       };
-      setNotes([newNote, ...notes]);
+      const updatedNotes = [newNote, ...notes];
+      await kv.set('notes', updatedNotes);
+      setNotes(updatedNotes);
       setNote('');
     }
   };
 
-  const deleteNote = (id) => {
-    setNotes(notes.filter(note => note.id !== id));
+  const deleteNote = async (id) => {
+    const updatedNotes = notes.filter(note => note.id !== id);
+    await kv.set('notes', updatedNotes);
+    setNotes(updatedNotes);
   };
 
   const handleKeyPress = (e) => {
