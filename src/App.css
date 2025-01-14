@@ -1,86 +1,77 @@
-.App {
-  text-align: center;
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  direction: rtl;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  background-color: #f0f2f5;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
 }
 
 .app-container {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  direction: rtl;
-  font-family: 'Segoe UI', 'Arial', sans-serif;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .header {
   text-align: center;
-  color: #2c3e50;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  color: #1a73e8;
+  font-size: 2.5rem;
+  font-weight: 600;
 }
 
 .input-container {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
 .input-field {
   flex: 1;
-  padding: 10px;
-  border: 2px solid #ddd;
-  border-radius: 5px;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
   font-size: 16px;
+  transition: all 0.3s ease;
+  text-align: right;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
 }
 
 .add-button {
-  padding: 10px 20px;
-  background-color: #3498db;
+  padding: 15px 30px;
+  background-color: #1a73e8;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
 }
 
 .add-button:hover {
-  background-color: #2980b9;
+  background-color: #1557b0;
+  transform: translateY(-2px);
 }
 
 .search-container {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .notes-list {
@@ -89,25 +80,67 @@
 }
 
 .note-item {
-  background-color: #f9f9f9;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: #ffffff;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.note-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.note-item p {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.note-item small {
+  color: #666;
+  font-size: 14px;
 }
 
 .delete-button {
-  background-color: #e74c3c;
+  background-color: #dc3545;
   color: white;
   border: none;
-  padding: 5px 10px;
-  border-radius: 3px;
+  padding: 8px 15px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 .delete-button:hover {
-  background-color: #c0392b;
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .app-container {
+    margin: 10px;
+    padding: 20px;
+  }
+
+  .input-container {
+    flex-direction: column;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+}
+
+/* Placeholder RTL Fix */
+input::placeholder {
+  text-align: right;
 }
